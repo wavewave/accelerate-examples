@@ -1,5 +1,4 @@
 {-# LANGUAGE CPP             #-}
-{-# LANGUAGE TemplateHaskell #-}
 
 module Config where
 
@@ -18,7 +17,22 @@ data Options = Options
   }
   deriving Show
 
-$(mkLabels [''Options])
+-- $(mkLabels [''Options])
+optBackend = lens _optBackend (\f a -> a { _optBackend = f (_optBackend a) })
+
+optWidth = lens _optWidth (\f a -> a { _optWidth = f (_optWidth a) })
+
+optHeight = lens _optHeight (\f a -> a { _optHeight = f (_optHeight a) })
+
+optLimit = lens _optLimit (\f a -> a { _optLimit = f (_optLimit a) })
+
+optFramerate = lens _optFramerate (\f a -> a { _optFramerate = f (_optFramerate a) })
+
+optBench = lens _optBench (\f a -> a { _optBench = f (_optBench a) })
+
+optHelp = lens _optHelp (\f a -> a { _optHelp = f (_optHelp a) })
+
+
 
 defaults :: Options
 defaults = Options
@@ -37,13 +51,13 @@ defaults = Options
 
 options :: [OptDescr (Options -> Options)]
 options =
-  [ Option []   ["width"]       (ReqArg (set optWidth . read) "INT")    "visualisation width (800)"
-  , Option []   ["height"]      (ReqArg (set optHeight . read) "INT")   "visualisation height (600)"
-  , Option []   ["limit"]       (ReqArg (set optLimit . read) "INT")    "iteration limit for escape (255)"
-  , Option []   ["framerate"]   (ReqArg (set optFramerate . read) "INT")"visualisation framerate (10)"
-  , Option []   ["static"]      (NoArg  (set optFramerate 0))           "do not animate the image"
-  , Option []   ["benchmark"]   (NoArg  (set optBench True))            "benchmark instead of displaying animation (False)"
-  , Option "h?" ["help"]        (NoArg  (set optHelp True))             "show help message"
+  [ Option []   ["width"]       (ReqArg ((\x f -> f {_optWidth=x}) . read) "INT")    "visualisation width (800)"
+  , Option []   ["height"]      (ReqArg ((\x f -> f {_optHeight=x}) . read) "INT")   "visualisation height (600)"
+  , Option []   ["limit"]       (ReqArg ((\x f -> f {_optLimit=x}) . read) "INT")    "iteration limit for escape (255)"
+  , Option []   ["framerate"]   (ReqArg ((\x f -> f {_optFramerate=x}) . read) "INT")"visualisation framerate (10)"
+  , Option []   ["static"]      (NoArg  (\f -> f {_optFramerate=0}))           "do not animate the image"
+  , Option []   ["benchmark"]   (NoArg  (\f -> f {_optBench=True}))            "benchmark instead of displaying animation (False)"
+  , Option "h?" ["help"]        (NoArg  (\f -> f {_optHelp=True}))             "show help message"
   ]
 
 

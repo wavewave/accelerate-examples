@@ -59,10 +59,10 @@ initialWorld config view
 setPrecisionOfWorld :: Precision -> Options -> World -> World
 setPrecisionOfWorld f config (World p _ z h v)
   = let
-        width   = get optWidth config
-        height  = get optHeight config
-        limit   = get optLimit config
-        backend = get optBackend config
+        width   = _optWidth config
+        height  = _optHeight config
+        limit   = _optLimit config
+        backend = _optBackend config
 
         render :: (Elt a, IsFloating a) => Render a
         render  = run1 backend
