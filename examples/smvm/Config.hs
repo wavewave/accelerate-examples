@@ -1,5 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
-
 module Config where
 
 import ParseArgs
@@ -13,7 +11,11 @@ data Config
   , _configHelp                 :: Bool
   }
 
-$(mkLabels [''Config])
+
+configBackend = lens _configBackend (\f a -> a { _configBackend = f (_configBackend a) })
+
+configHelp = lens _configHelp (\f a -> a { _configHelp = f (_configHelp a) })
+
 
 defaults :: Config
 defaults = Config
