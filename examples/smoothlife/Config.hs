@@ -1,5 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
-
 module Config
   where
 
@@ -75,7 +73,44 @@ data Config = Config
   , _configHelp                 :: Bool
   }
 
-$(mkLabels [''Config])
+-- $(mkLabels [''Config])
+
+configBackend = lens _configBackend (\f a -> a { _configBackend = f (_configBackend a) })
+
+configWindowSize = lens _configWindowSize (\f a -> a { _configWindowSize = f (_configWindowSize a) })
+
+configWindowZoom = lens _configWindowZoom (\f a -> a { _configWindowZoom = f (_configWindowZoom a) })
+
+configFramerate = lens _configFramerate (\f a -> a { _configFramerate = f (_configFramerate a) })
+
+configTimestep = lens _configTimestep (\f a -> a { _configTimestep = f (_configTimestep a) })
+
+configColourScheme = lens _configColourScheme (\f a -> a { _configColourScheme = f (_configColourScheme a) })
+
+configRim = lens _configRim (\f a -> a { _configRim = f (_configRim a) })
+
+configDiscRadius = lens _configDiscRadius (\f a -> a { _configDiscRadius = f (_configDiscRadius a) })
+
+configBirthInterval = lens _configBirthInterval (\f a -> a { _configBirthInterval = f (_configBirthInterval a) })
+
+configDeathInterval = lens _configDeathInterval (\f a -> a { _configDeathInterval = f (_configDeathInterval a) })
+
+configStep = lens _configStep (\f a -> a { _configStep = f (_configStep a) })
+
+configTimestepMode = lens _configTimestepMode (\f a -> a { _configTimestepMode = f (_configTimestepMode a) })
+
+configSigmode = lens _configSigmode (\f a -> a { _configSigmode = f (_configSigmode a) })
+
+configSigtype = lens _configSigtype (\f a -> a { _configSigtype = f (_configSigtype a) })
+
+configMixtype = lens _configMixtype (\f a -> a { _configMixtype = f (_configMixtype a) })
+
+configMaxSteps = lens _configMaxSteps (\f a -> a { _configMaxSteps = f (_configMaxSteps a) })
+
+configBenchmark = lens _configBenchmark (\f a -> a { _configBenchmark = f (_configBenchmark a) })
+
+configHelp = lens _configHelp (\f a -> a { _configHelp = f (_configHelp a) })
+
 
 
 defaults :: Config

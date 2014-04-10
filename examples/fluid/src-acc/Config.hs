@@ -50,7 +50,39 @@ data Config = Config
   , _setupVelocity      :: Initial VelocityField
   }
 
-$(mkLabels [''Config])
+viscosity = lens _viscosity (\f a -> a { _viscosity = f (_viscosity a) })
+
+diffusion = lens _diffusion (\f a -> a { _diffusion = f (_diffusion a) })
+
+timestep = lens _timestep (\f a -> a { _timestep = f (_timestep a) })
+
+inputDensity = lens _inputDensity (\f a -> a { _inputDensity = f (_inputDensity a) })
+
+inputVelocity = lens _inputVelocity (\f a -> a { _inputVelocity = f (_inputVelocity a) })
+
+simulationSteps = lens _simulationSteps (\f a -> a { _simulationSteps = f (_simulationSteps a) })
+
+simulationWidth = lens _simulationWidth (\f a -> a { _simulationWidth = f (_simulationWidth a) })
+
+simulationHeight = lens _simulationHeight (\f a -> a { _simulationHeight = f (_simulationHeight a) })
+
+displayScale = lens _displayScale (\f a -> a { _displayScale = f (_displayScale a) })
+
+displayFramerate = lens _displayFramerate (\f a -> a { _displayFramerate = f (_displayFramerate a) })
+
+initialDensity = lens _initialDensity (\f a -> a { _initialDensity = f (_initialDensity a) })
+
+initialVelocity = lens _initialVelocity (\f a -> a { _initialVelocity = f (_initialVelocity a) })
+
+optBackend = lens _optBackend (\f a -> a { _optBackend = f (_optBackend a) })
+
+optBench = lens _optBench (\f a -> a { _optBench = f (_optBench a) })
+
+optHelp = lens _optHelp (\f a -> a { _optHelp = f (_optHelp a) })
+
+setupDensity = lens _setupDensity (\f a -> a { _setupDensity = f (_setupDensity a) })
+
+setupVelocity = lens _setupVelocity (\f a -> a { _setupVelocity = f (_setupVelocity a) })
 
 
 defaults :: Config
